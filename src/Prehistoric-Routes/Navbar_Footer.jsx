@@ -9,13 +9,25 @@ export default function Navbar_Footer() {
                 <img src="favicon.jpg" alt="" width="30" height="30" class="d-inline-block align-text-center">
                 </img><strong className="navtitulo">Prehistoric Kingdom</strong>
               </a>
-              <div className="align-text-center">
-                <a className="form-label-lg aText" href="#"><strong><i class="bi bi-house-door-fill"></i> Inicio</strong></a>
-                <a className="form-label-lg aText" href="#"><strong><i class="fa-solid fa-crow"></i> Triásico</strong></a>
-                <a className="form-label-lg aText" href="#"><strong><i class="fa-solid fa-crow"></i> Jurásico</strong></a>
-                <a className="form-label-lg aText" href="#"><strong><i class="fa-solid fa-crow"></i> Cretácico</strong></a>
-                <a className="form-label-lg aText" href="#"><strong><i class="bi bi-bookmark-plus-fill"></i> Crud</strong></a>
-                <a className="form-label-lg aText" href="#"><strong><i class="bi bi-person-circle"></i> Contacto</strong></a>
+              <div class="align-text-center">
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/"} class="aText"><i class="bi bi-house-door-fill"></i> Inicio</Link></strong>
+                </a>
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/Periodo-Triasico"} class="aText"><i class="fa-solid fa-crow"></i> Triásico</Link></strong>
+                </a>
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/Periodo-Jurasico"} class="aText"><i class="fa-solid fa-crow"></i> Jurásico</Link></strong>
+                </a>
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/Periodo-Cretacico"} class="aText"><i class="fa-solid fa-crow"></i> Cretácico</Link></strong>
+                </a>
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/Mantenimiento"} class="aText"><i class="bi bi-bookmark-plus-fill"></i> Mantenimiento</Link></strong>
+                </a>
+                <a class="form-label-lg aText">
+                  <strong><Link to={"/Contacto"} class="aText"><i class="bi bi-person-circle"></i> Contacto</Link></strong>
+                </a>
               </div>
             </div>
         </nav>
