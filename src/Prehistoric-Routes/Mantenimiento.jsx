@@ -7,6 +7,7 @@ export default function Mantenimiento() {
             <Navbar_Footer />
             <div className="pt-5 mt-5"></div>
             <VerEspecies />
+            <div className="pt-5 mt-5"></div>
         </div>
     );    
 }

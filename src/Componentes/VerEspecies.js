@@ -95,7 +95,7 @@ const VerEspecies = () => {
                 parametros = {Nombre:Nombre.trim(), Significado:Significado.trim(), Dieta:Dieta.trim(), Peso:Peso.trim(), Periodo:Periodo.trim(), Hallazgo:Hallazgo.trim(), Dimensiones:Dimensiones.trim(), Descripcion:Descripcion.trim(), Tiempo:Tiempo.trim(), Imagen:Imagen.trim()};
                 metodo = 'POST';
             } else {
-                parametros = {Nombre:Nombre.trim(), Significado:Significado.trim(), Dieta:Dieta.trim(), Peso:Peso.trim(), Periodo:Periodo.trim(), Hallazgo:Hallazgo.trim(), Dimensiones:Dimensiones.trim(), Descripcion:Descripcion.trim(), Tiempo:Tiempo.trim(), Imagen:Imagen.trim()};
+                parametros = {IdEspecie:IdEspecie, Nombre:Nombre.trim(), Significado:Significado.trim(), Dieta:Dieta.trim(), Peso:Peso.trim(), Periodo:Periodo.trim(), Hallazgo:Hallazgo.trim(), Dimensiones:Dimensiones.trim(), Descripcion:Descripcion.trim(), Tiempo:Tiempo.trim(), Imagen:Imagen.trim()};
                 metodo = 'PUT';
             }
             enviarSolicitud(metodo, parametros);
@@ -198,7 +198,7 @@ const VerEspecies = () => {
                     </div>
                 </div>
             </div>
-            <div id='modalEspecies' className="modal fade" aria-hidde='true'>
+            <div id='modalEspecies' className="modal fade" aria-hidden='true'>
                 <div className='modal-dialog'>
                     <div className='modal-content'>
                         <div className='modal-header'>
