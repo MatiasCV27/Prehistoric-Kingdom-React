@@ -6,8 +6,7 @@ export default function Navbar_Footer() {
         <nav className="navbar-dark navDino fixed-top navbar-expand-lg">
             <div className="container d-flex justify-content-between">
               <a className="navbar-brand" href="">
-                <img src="favicon.jpg" alt="" width="30" height="30" className="d-inline-block align-text-center">
-                </img><strong className="navtitulo">Prehistoric Kingdom</strong>
+                <strong className="navtitulo"><i class="bi bi-lightning-fill"></i>Prehistoric Kingdom<i class="bi bi-lightning-fill"></i></strong>
               </a>
               <div className="align-text-center">
                 <a className="form-label-lg aText">
