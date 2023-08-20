@@ -24,13 +24,18 @@ const VerEspecies = () => {
     const [Title,setTitle] = useState(1);
 
 
-    useEffect( ()=> {
-        getEspecies();
-    },[]);
-
+    useEffect(() => {
+        getEspecies(); 
+    }, []); 
+    
     const getEspecies = async () => {
-        const respuesta = await axios.get(url);
-        setEspecies(respuesta.data);
+        try {
+            const respuesta = await axios.get(url);
+            console.log("Datos obtenidos del servidor:", respuesta.data); // Agregar esta línea
+            setEspecies(respuesta.data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const openModal = (op, IdEspecie, Nombre, Significado, Dieta, Peso, Periodo, Hallazgo, Dimensiones, Descripcion, Tiempo, Imagen) => {
@@ -102,21 +107,21 @@ const VerEspecies = () => {
         }
     }
 
-    const enviarSolicitud = async(metodo, parametros) => {
-        await axios({ method:metodo, url:url, data:parametros}).then(function(respuesta){
-            var tipo = respuesta.data[0];
-            var msj = respuesta.data[1];
-            mostrarAlerta(msj,tipo);
-            if (tipo === 'success') {
+    const enviarSolicitud = async (metodo, parametros) => {
+        try {
+            const respuesta = await axios({ method: metodo, url: url, data: parametros });
+            if (respuesta.data === true) {
+                mostrarAlerta('Operación exitosa', 'success');
                 document.getElementById('btnCerrar').click();
                 getEspecies();
+            } else {
+                mostrarAlerta('La operación falló', 'error');
             }
-        })
-        .catch(function(error){
+        } catch (error) {
             mostrarAlerta('Error en la solicitud', 'error');
             console.log(error);
-        }); 
-    }
+        }
+    };
 
     const eliminarEspecie = (IdEspecie, Nombre) => {
         const MySwal = withReactContent(Swal);
@@ -126,12 +131,20 @@ const VerEspecies = () => {
             showCancelButton:true,confirmButtonText: 'Si, eliminar', cancelButtonText:'Cancelar' 
         }).then((result) => {
             if(result.isConfirmed) {
-                setIdEspecie(IdEspecie);
-                enviarSolicitud('DELETE',{IdEspecie:IdEspecie});
+                console.log("Eliminar especie confirmado");
+                axios.delete(`http://localhost:55232/api/Especie/${IdEspecie}`)
+                    .then(response => {
+                        console.log('Especie eliminada:', response.data);
+                        getEspecies();
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar la especie:', error);
+                    });
             } else {
+                console.log("Eliminar especie cancelado");
                 mostrarAlerta('La especie NO fue eliminada', 'info');
             }
-        })
+        });
     }
  
     return (
@@ -140,7 +153,7 @@ const VerEspecies = () => {
                 <div className='row mt-3'>
                     <div className='col-md-4 mx-auto'>
                         <button onClick={() => openModal(1)} className='btn btn-dark w-100' data-bs-toggle='modal' data-bs-target='#modalEspecies'>
-                            <i className="bi bi-plus-circle-fill"></i> Añadir
+                            <i className="bi bi-plus-circle-fill"></i> Añadir una Nueva Especie
                         </button>
                     </div>
                 </div>
@@ -150,34 +163,36 @@ const VerEspecies = () => {
                             <table className='table table-bordered'>
                                 <thead>
                                     <tr>
-                                        <th className='text-center'>#</th>
-                                        <th className='text-center'>Nombre</th>
-                                        <th className='text-center'>Significado</th>
-                                        <th className='text-center'>Dieta</th>
-                                        <th className='text-center'>Peso</th>
-                                        <th className='text-center'>Periodo</th>
-                                        <th className='text-center'>Hallazgo</th>
-                                        <th className='text-center'>Dimensiones</th>
-                                        <th className='text-center'>Descripción</th>
-                                        <th className='text-center'>Tiempo</th>
-                                        <th className='text-center'>Imagen</th>
+                                        <th className='thTitulos'>#</th>
+                                        <th className='thTitulos'>Nombre</th>
+                                        <th className='thTitulos'>Significado</th>
+                                        <th className='thTitulos'>Dieta</th>
+                                        <th className='thTitulos'>Peso</th>
+                                        <th className='thTitulos'>Periodo</th>
+                                        <th className='thTitulos'>Hallazgo</th>
+                                        <th className='thTitulos'>Dimensiones</th>
+                                        <th className='thTitulos'>Descripción</th>
+                                        <th className='thTitulos'>Tiempo</th>
+                                        <th className='thTitulos'>Imagen</th>
+                                        <th className='thTitulos'></th>
+                                        <th className='thTitulos'></th>
                                     </tr>
                                 </thead>
-                                <tbody className='table-group-divider'>
+                                <tbody className='table-group-divider text-white'>
                                     {especies.map((especie, i) => (
                                         <tr key={especie.IdEspecie}>
-                                            <td>{i + 1}</td>
-                                            <td>{especie.Nombre}</td>
-                                            <td>{especie.Significado}</td>
-                                            <td>{especie.Dieta}</td>
-                                            <td>{especie.Peso}</td>
-                                            <td>{especie.Periodo}</td>
-                                            <td>{especie.Hallazgo}</td>
-                                            <td>{especie.Dimensiones}</td>
-                                            <td>{especie.Descripcion}</td>
-                                            <td>{especie.Tiempo}</td>
-                                            <td><img src={especie.Imagen} width='50px' alt={`Imagen de ${especie.Nombre}`} /></td>
-                                            <td>
+                                            <td className='especieText'>{i + 1}</td>
+                                            <td className='especieText'>{especie.Nombre}</td>
+                                            <td className='especieText'>{especie.Significado}</td>
+                                            <td className='especieText'>{especie.Dieta}</td>
+                                            <td className='especieText'>{especie.Peso}</td>
+                                            <td className='especieText'>{especie.Periodo}</td>
+                                            <td className='especieText'>{especie.Hallazgo}</td>
+                                            <td className='especieText'>{especie.Dimensiones}</td>
+                                            <td className='especieTextDes'>{especie.Descripcion}</td>
+                                            <td className='especieText bg-dark text-white'>{especie.Tiempo}</td>
+                                            <td className='especieText'><img src={especie.Imagen} className='imgTablaEspecie' alt={`Imagen de ${especie.Nombre}`} /></td>
+                                            <td className='especieText'>
                                                 <button onClick={() => openModal(2, 
                                                     especie.IdEspecie, especie.Nombre, especie.Significado, especie.Dieta,
                                                     especie.Peso, especie.Periodo, especie.Hallazgo, especie.Dimensiones,
@@ -185,7 +200,7 @@ const VerEspecies = () => {
                                                     <i className="bi bi-pencil-fill"></i>
                                                 </button>
                                             </td>
-                                            <td>
+                                            <td className='especieText'>
                                                 <button onClick={() => eliminarEspecie(especie.IdEspecie, especie.Nombre)} className='btn btn-danger'>
                                                     <i className="bi bi-trash3-fill"></i>
                                                 </button>

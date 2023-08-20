@@ -4,7 +4,7 @@
     padding: 1.175em 0;
     font-size: 1em;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    border-bottom: 5px solid #842029;
+    border-bottom: 2px solid white;
 }
 .aText {
     text-decoration: none;
@@ -30,7 +30,7 @@
     padding: .8em 0;
     font-size: 1em;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    border-top: 5px solid #842029;
+    border-top: 2px solid white;
 }
 .textfoot {
     margin: 0;
@@ -44,4 +44,32 @@
 }
 .footicon:hover {
     color: rgba(255, 255, 255, .75);
+}
+/*! Tabla textos */
+.fondoCrud {
+    background-image: radial-gradient(circle, #c4d79b, #6fa68e, #427075, #303c46, #111111);
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+.especieText {
+    font-size: .775em;
+    vertical-align: middle;
+    text-align: center;
+    background: #212529!important;
+    color: white!important;
+}
+.especieTextDes {
+    font-size: .775em;
+    vertical-align: middle;
+    background: #212529!important;
+    color: white!important;
+}
+.imgTablaEspecie {
+    width: 100px;
+    border: 2px solid white;
+}
+.thTitulos {
+    background: #212529!important;
+    text-align: center;
+    color: white!important;
 }
